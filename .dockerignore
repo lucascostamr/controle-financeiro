@@ -1,0 +1,7 @@
+.trunk
+target
+compose.yml
+Dockerfile
+README.md
+.gitignore
+public

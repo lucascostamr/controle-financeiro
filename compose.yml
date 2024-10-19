@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    volumes:
+      - /home/user/app/target
+      - .:/home/user/app
+    tty: true
