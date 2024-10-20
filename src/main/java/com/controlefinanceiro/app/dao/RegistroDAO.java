@@ -37,4 +37,14 @@ public class RegistroDAO implements RegistroRepository{
         ));
         pstmt.executeUpdate();
     }
+
+    public void delete(int id) throws Exception {
+        String sql = "DELETE FROM registro WHERE id = ?";
+
+        PreparedStatement pstmt = DAOHelper
+                                    .connect()
+                                    .prepareStatement(sql);
+        pstmt.setInt(1, id);
+        pstmt.executeUpdate();
+    }
 }

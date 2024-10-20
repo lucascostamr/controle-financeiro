@@ -13,10 +13,14 @@ public class RegistroModel {
         this.registroRepository = registroRepository;
     }
 
-    public void save(RegistroDTO registroDTO) throws Exception{
+    public void save(RegistroDTO registroDTO) throws Exception {
         this.registroRepository.save(
             this.map(registroDTO)
         );
+    }
+
+    public void delete(int registroId) throws Exception {
+        this.registroRepository.delete(registroId);
     }
 
     private Registro map(RegistroDTO registroDTO) {
