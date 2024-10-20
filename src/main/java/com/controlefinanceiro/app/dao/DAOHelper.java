@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 
 public class DAOHelper {
-    private static final String url = "jdbc:postgresql://postgre:5432/controle_financeiro";
+    private static final String url = "jdbc:postgresql://postgre:5432/postgres";
     private static final String user = "postgres";
     private static final String password = "password";
 
