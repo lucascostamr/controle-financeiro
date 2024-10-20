@@ -2,7 +2,7 @@
 
 # To run you'll need to:
 
-# Create the .env file. Then:
+Create the .env file. Then:
 
 `
     docker compose up --build
