@@ -26,7 +26,8 @@ public class RegistroModel {
     private Registro map(RegistroDTO registroDTO) {
         String valorNormalizado = registroDTO
                                 .getValor()
-                                .replace(" ", "");
+                                .replace(" ", "")
+                                .replace(",", ".");
 
         double valor = Double.parseDouble(
             valorNormalizado.substring(1)
