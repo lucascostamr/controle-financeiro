@@ -4,5 +4,14 @@ services:
     volumes:
       - /home/user/app/target
       - .:/home/user/app
+    depends_on:
+      - postgre
     command: bash
     tty: true
+
+  postgre:
+    image: postgres:17.0-alpine3.20
+    environment:
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
