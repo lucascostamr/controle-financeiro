@@ -61,6 +61,7 @@ public class RegistroDAO implements RegistroRepository{
         while (rs.next()) {
             registros.add (
                 new Registro(
+                    rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("tipo"),
                     rs.getDouble("valor"),

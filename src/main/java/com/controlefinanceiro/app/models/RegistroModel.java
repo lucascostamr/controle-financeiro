@@ -63,6 +63,7 @@ public class RegistroModel {
         for (Registro registro : registros) {
             registroDTOs.add(
                 new RegistroDTO(
+                    registro.getId(),
                     registro.getNome(),
                     String.valueOf(
                         registro.getValor()
