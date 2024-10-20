@@ -1,6 +1,8 @@
 package com.controlefinanceiro.app;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.controlefinanceiro.app.RegistroRepository;
 import com.controlefinanceiro.app.RegistroDTO;
@@ -15,7 +17,7 @@ public class RegistroModel {
 
     public void save(RegistroDTO registroDTO) throws Exception {
         this.registroRepository.save(
-            this.map(registroDTO)
+            this.mapRegistro(registroDTO)
         );
     }
 
@@ -23,7 +25,13 @@ public class RegistroModel {
         this.registroRepository.delete(registroId);
     }
 
-    private Registro map(RegistroDTO registroDTO) {
+    public List<RegistroDTO> list() throws Exception {
+        return this.mapDTO(
+            this.registroRepository.list()
+        );
+    }
+
+    private Registro mapRegistro(RegistroDTO registroDTO) {
         String valorNormalizado = registroDTO
                                 .getValor()
                                 .replace(" ", "")
@@ -43,5 +51,23 @@ public class RegistroModel {
             registroDTO.getData(),
             new Date()
         );
+    }
+
+    private List<RegistroDTO> mapDTO(List<Registro> registros) {
+        List<RegistroDTO> registroDTOs = new ArrayList<>();
+
+        for (Registro registro : registros) {
+            registroDTOs.add(
+                new RegistroDTO(
+                    registro.getNome(),
+                    String.valueOf(
+                        registro.getValor()
+                    ),
+                    registro.getClassificacao(),
+                    registro.getData()
+                )
+            );
+        }
+        return registroDTOs;
     }
 }

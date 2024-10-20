@@ -1,6 +1,7 @@
 package com.controlefinanceiro.app;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 
@@ -46,5 +47,33 @@ public class RegistroDAO implements RegistroRepository{
                                     .prepareStatement(sql);
         pstmt.setInt(1, id);
         pstmt.executeUpdate();
+    }
+
+    public List<Registro> list() throws Exception {
+        List<Registro> registros = new ArrayList<>();
+
+        String sql = "SELECT id, nome, tipo, valor, classificacao, data, data_cadastro "
+                    + "FROM registro";
+
+        PreparedStatement pstmt = DAOHelper.connect().prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            registros.add (
+                new Registro(
+                    rs.getString("nome"),
+                    rs.getString("tipo"),
+                    rs.getDouble("valor"),
+                    rs.getString("classificacao"),
+                    rs.getDate("data"),
+                    rs.getDate("data_cadastro")
+                )
+            );
+        }
+
+        rs.close();
+        pstmt.close();
+
+        return registros;
     }
 }
