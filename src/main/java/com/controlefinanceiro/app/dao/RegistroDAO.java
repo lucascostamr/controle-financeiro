@@ -14,22 +14,23 @@ import com.controlefinanceiro.app.DAOHelper;
 public class RegistroDAO implements RegistroRepository{
 
     public void save(Registro registro) throws Exception {
-        String sql = "INSERT INTO registro (tipo, valor, classificacao, data, data_cadastro)"
-                    + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO registro (nome, tipo, valor, classificacao, data, data_cadastro)"
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
         
         PreparedStatement pstmt = DAOHelper
                                     .connect()
                                     .prepareStatement(sql);
 
-        pstmt.setString(1, registro.getTipo());
-        pstmt.setDouble(2, registro.getValor());
-        pstmt.setString(3, registro.getClassificacao());
-        pstmt.setDate(4, new Date(
+        pstmt.setString(1, registro.getNome());
+        pstmt.setString(2, registro.getTipo());
+        pstmt.setDouble(3, registro.getValor());
+        pstmt.setString(4, registro.getClassificacao());
+        pstmt.setDate(5, new Date(
             registro
                 .getData()
                 .getTime()
         ));
-        pstmt.setDate(5, new Date(
+        pstmt.setDate(6, new Date(
             registro
                 .getDataCadastro()
                 .getTime()

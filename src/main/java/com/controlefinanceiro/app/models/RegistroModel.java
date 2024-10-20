@@ -1,24 +1,42 @@
 package com.controlefinanceiro.app;
 
+import java.util.Date;
+
 import com.controlefinanceiro.app.RegistroRepository;
 import com.controlefinanceiro.app.RegistroDTO;
-import com.controlefinanceiro.app.RegistroMapper;
+import com.controlefinanceiro.app.Registro;
 
 public class RegistroModel {
     private RegistroRepository registroRepository;
-    private RegistroMapper registroMapper;
 
-    public RegistroModel(
-        RegistroRepository registroRepository,
-        RegistroMapper registroMapper
-    ) {
+    public RegistroModel(RegistroRepository registroRepository) {
         this.registroRepository = registroRepository;
-        this.registroMapper = registroMapper;
     }
 
     public void save(RegistroDTO registroDTO) throws Exception{
         this.registroRepository.save(
-            this.registroMapper.toDomain(registroDTO)
+            this.map(registroDTO)
+        );
+    }
+
+    private Registro map(RegistroDTO registroDTO) {
+        String valorNormalizado = registroDTO
+                                .getValor()
+                                .replace(" ", "");
+
+        double valor = Double.parseDouble(
+            valorNormalizado.substring(1)
+        );
+
+        String tipo = valorNormalizado.charAt(0) == '+' ? "Ganho" : "Gasto";
+
+        return new Registro(
+            registroDTO.getNome(),
+            tipo,
+            valor,
+            registroDTO.getClassificacao(),
+            registroDTO.getData(),
+            new Date()
         );
     }
 }

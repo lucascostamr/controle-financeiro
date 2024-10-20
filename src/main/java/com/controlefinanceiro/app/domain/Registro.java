@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 @Data
 @AllArgsConstructor
 public class Registro {
+    private String nome;
     private String tipo;
     private double valor;
     private String classificacao;
