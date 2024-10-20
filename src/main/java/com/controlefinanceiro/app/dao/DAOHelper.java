@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 
 public class DAOHelper {
-    private static final String url = "jdbc:postgresql://postgre:5432/postgres";
-    private static final String user = "postgres";
-    private static final String password = "password";
+    private static final String url = System.getenv("JDBC_CONNECTION_STRING");
+    private static final String user = System.getenv("POSTGRES_USER");
+    private static final String password = System.getenv("POSTGRES_PASSWORD");
 
     private static Connection connection = null;
     
