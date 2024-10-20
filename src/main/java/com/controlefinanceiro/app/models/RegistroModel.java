@@ -31,6 +31,10 @@ public class RegistroModel {
         );
     }
 
+    public List<Double> total() throws Exception {
+        return this.registroRepository.total();
+    }
+
     private Registro mapRegistro(RegistroDTO registroDTO) {
         String valorNormalizado = registroDTO
                                 .getValor()

@@ -76,4 +76,29 @@ public class RegistroDAO implements RegistroRepository{
 
         return registros;
     }
+
+    public List<Double> total() throws Exception{
+        List<Double> total = new ArrayList<>();
+
+        String sql = "SELECT "
+            + "SUM(CASE WHEN tipo = 'Ganho' THEN valor ELSE 0 END) AS total_ganho, "
+            + "SUM(CASE WHEN tipo = 'Gasto' THEN valor ELSE 0 END) AS total_gasto, "
+            + "SUM(CASE WHEN tipo = 'Ganho' THEN valor ELSE 0 END) - "
+            + "SUM(CASE WHEN tipo = 'Gasto' THEN valor ELSE 0 END) AS diff "
+            + "FROM registro;";
+
+        PreparedStatement pstmt = DAOHelper.connect().prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            total.add(rs.getDouble("total_ganho"));
+            total.add(rs.getDouble("total_gasto"));
+            total.add(rs.getDouble("diff"));
+        }
+        rs.close();
+        pstmt.close();
+
+        return total;
+    }
 }

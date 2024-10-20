@@ -10,4 +10,5 @@ public interface RegistroRepository {
     void save(Registro registro) throws Exception;
     void delete(int registroId) throws Exception;
     List<Registro> list() throws Exception;
+    List<Double> total() throws Exception;
 }
